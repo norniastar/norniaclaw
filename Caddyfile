@@ -1,0 +1,24 @@
+{
+  # local dev defaults
+  auto_https off
+}
+
+# 单入口：前端 + /api 反代后端
+:80 {
+  encode gzip
+
+  # 后端 API
+  handle_path /api/* {
+    reverse_proxy 127.0.0.1:8888
+  }
+
+  # swagger / docs（如果后端有）
+  handle_path /swagger/* {
+    reverse_proxy 127.0.0.1:8888
+  }
+
+  # 前端 dev server
+  handle {
+    reverse_proxy 127.0.0.1:5173
+  }
+}
