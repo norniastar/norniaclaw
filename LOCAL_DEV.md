@@ -13,18 +13,20 @@
 - `/api/*` → `127.0.0.1:8888`
 - 其它 → `127.0.0.1:5173`
 
-启动示例：
+启动示例（代理端口为 8090）：
 
 ```bash
 caddy run --config ./Caddyfile
+# 然后访问 http://127.0.0.1:8090
 ```
 
-## gin-vue-admin 后端 MySQL 配置（待你确认）
+## gin-vue-admin 后端 MySQL 配置（本地）
 
-gin-vue-admin 后端一般读取 `server/config.yaml` / `server/config.docker.yaml`。
+gin-vue-admin 后端支持用环境变量 `GVA_CONFIG` 指定配置文件。
 
-我建议做法：
-- 不把密码写死进仓库
-- 用 `.env`（不提交）或本机环境变量注入，然后在配置里引用/或启动脚本替换
+我建议做法（避免泄露密码）：
+- 复制 `server/config.local.yaml.example` → `server/config.local.yaml`（该文件已被 `.gitignore` 忽略）
+- 用你的本地 MySQL 信息填好
+- 启动后端时设置：`GVA_CONFIG=server/config.local.yaml`
 
-你把 MySQL 连接信息给我，我会把后端改成“默认走本地 MySQL”。
+我已经在你本机生成了一个 `server/config.local.yaml`（未提交到 git），用于连接你给的本地 MySQL。

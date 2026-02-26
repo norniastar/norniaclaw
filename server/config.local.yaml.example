@@ -1,0 +1,18 @@
+# Copy to config.local.yaml (this file is gitignored) and fill in your local MySQL.
+# Then run server with: GVA_CONFIG=server/config.local.yaml
+system:
+  env: local
+  addr: 8888
+  db-type: mysql
+  router-prefix: ""
+
+mysql:
+  path: "127.0.0.1"
+  port: "3306"
+  config: "charset=utf8mb4&parseTime=True&loc=Local"
+  db-name: "YOUR_DB"
+  username: "YOUR_USER"
+  password: "YOUR_PASSWORD"
+  max-idle-conns: 10
+  max-open-conns: 100
+  log-zap: false
